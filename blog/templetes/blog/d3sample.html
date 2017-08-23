@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
+
 </head>
 
 
@@ -31,6 +32,7 @@ body {
 </style>
 
 <body>
+
  {% block content %}
 
 <script>
@@ -101,6 +103,7 @@ var callback = function (data) {
 d3.json("{% url "data" %}",  callback);
 
 </script>
+
 {% endblock %}
 </body>
 </html>

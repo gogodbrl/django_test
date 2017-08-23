@@ -2,9 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script> 
+<title>introduce</title>
 <style>
 
 #chart {
@@ -65,17 +63,27 @@ rect.parent {
 
 </style>
 
-
-
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        
 </head>
 
 <body>
-  
 {% block content %}
-
+<div class="page-header">
+ 	{% if user.is_authenticated %}
+ 	<a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+ 	<a href="{% url 'post_draft_list' %}" class="top-menu"><span class="glyphicon glyphicon-edit"></span></a>
+ 	{% endif %}
+     <h1><a href="/">Blog</a></h1>
+ </div>
+<h1>Introduction</h1>
 <div id="chart"></div>
-<!-- <script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script> -->
+
 <script>
 window.addEventListener('message', function(e) {
     var opts = e.data.opts,
@@ -192,6 +200,7 @@ function main(o, data) {
     if (d._children) {
       treemap.nodes({_children: d._children});
       d._children.forEach(function(c) {
+
         c.x = d.x + c.x * d.dx;
         c.y = d.y + c.y * d.dy;
         c.dx *= d.dx;
@@ -245,9 +254,9 @@ function main(o, data) {
 
     t.append("tspan")
         .text(function(d) { return d.key; });
-    t.append("tspan")
+	t.append("tspan")
         .attr("dy", "1.0em")
-        .text(function(d) { return formatNumber(d.value); });
+        .text(function(d) { return d.inner_str; });
     t.call(text);
 
     g.selectAll("rect")
@@ -324,12 +333,13 @@ if (window.location.hash === "") {
     d3.json("/countries", function(err, res) {
         if (!err) {
             console.log(res);
-            var data = d3.nest().key(function(d) { return d.region; }).key(function(d) { return d.subregion; }).entries(res);
-            main({title: "World Population"}, {key: "World", values: data});
+            //var data = d3.nest().key(function(d) { return d.region; }).key(function(d) { return d.subregion; }).entries(res);
+            var data = d3.nest().key(function(d) { return d.region; }).entries(res);
+            main({title: ""}, {key: "Junga", values: data});
         }
     });
 }
-{% endblock %}
 </script>
+{% endblock %}
 </body>
 </html>
