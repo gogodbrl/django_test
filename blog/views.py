@@ -8,6 +8,9 @@ from .forms import Postform
 from django.http import JsonResponse
 import json
 import numpy as np
+from django.contrib.auth.decorators import login_required
+import os
+
 
 
 # Create your views here.
@@ -19,6 +22,7 @@ def post_detail(request, pk):
     post = get_object_or_404(Post1, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
 
+@login_required
 def post_new(request) :
     if request.method == "POST" :
         form = Postform(request.POST)
@@ -53,8 +57,33 @@ def data(request):
     myData = json.dumps([{"date":x[i], "close":y[i]} for i in range(5)])    
     return JsonResponse(myData, safe=False)
 
+def countries(request):
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    json_data = open(os.path.join(BASE_DIR,'blog','static','json','countries.json')).read()
+    data = json.loads(json_data)
+    return JsonResponse(data, safe=False)
+
 def d3sample(request):
     return render(request, 'blog/d3sample.html', {})
     
 def d3test(request):
     return render(request, 'blog/d3test.html', {})
+
+def post_draft_list(request):
+    posts = Post1.objects.filter(publish_date__isnull=True).order_by('created_date')
+    return render(request, 'blog/post_draft_list.html', {'posts':posts})
+
+def post_publish(request, pk):
+    post = get_object_or_404(Post1, pk=pk)
+    post.publish()
+    return redirect('post_detail', pk=pk)
+
+def publish(self):
+    self.published_date = timezone.now()
+    self.save()
+    
+def post_remove(request, pk):
+    post = get_object_or_404(Post1, pk=pk)
+    post.delete()
+    return redirect('post_list')    
+    
