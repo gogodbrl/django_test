@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+{% extends 'blog/base.html' %}
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
 </head>
 
 
@@ -32,7 +31,8 @@ body {
 </style>
 
 <body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
+ {% block content %}
+
 <script>
 // setting graph location
 var margin = {top: 30, right: 20, bottom: 30, left: 50},
@@ -69,16 +69,7 @@ var parseDate = d3.time.format("%Y%m%d").parse;
 // draw graph
 var callback = function (data) {
 	
-    // error1. normal grammer
-    // document.write(data)
-    
-    // error 2 : data format is string 
-    // var datatype = typeOf(data);
-    // document.write(datatype);
- 
     data = JSON.parse(data);
-    //alert(JSON.stringify(data1[0]));
-  
     data.forEach(function(d) {
         d.date = parseDate(d.date);
         d.close = +d.close;
@@ -110,6 +101,7 @@ var callback = function (data) {
 d3.json("{% url "data" %}",  callback);
 
 </script>
-
+<h1>{{ post.title }}</h1>
+{% endblock %}
 </body>
 </html>

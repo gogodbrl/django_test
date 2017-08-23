@@ -12,8 +12,7 @@ import numpy as np
 
 # Create your views here.
 def post_list(request):
-    posts = Post1.objects.filter().order_by('id')
-    #posts = Post1.objects.all() 
+    posts = Post1.objects.filter().order_by('id').reverse()
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 def post_detail(request, pk):
@@ -36,7 +35,7 @@ def post_new(request) :
 def post_edit(request, pk):
     post = get_object_or_404(Post1, pk=pk)
     if request.method =="POST" :
-        form = Postform(request.POST)
+        form = Postform(request.POST, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
@@ -55,5 +54,7 @@ def data(request):
     return JsonResponse(myData, safe=False)
 
 def d3sample(request):
-    return render(request, 'blog/d3sample.html', context=None)
+    return render(request, 'blog/d3sample.html', {})
     
+def d3test(request):
+    return render(request, 'blog/d3test.html', {})
