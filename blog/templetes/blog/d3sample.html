@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+
+
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+</style>
+
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+// setting graph location
+var margin = {top: 30, right: 20, bottom: 30, left: 50},
+    width = 600 - margin.left - margin.right,
+    height = 270 - margin.top - margin.bottom;
+ 
+// graph range
+var x = d3.time.scale().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
+ 
+// axis define
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom");
+var yAxis = d3.svg.axis().scale(y)
+    .orient("left");
+ 
+// line define
+var valueline = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.close); });
+    
+// canvas object 
+var svg = d3.select("body")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
+ 
+// 2017-07-01 formatting
+var parseDate = d3.time.format("%Y%m%d").parse;
+ 
+// draw graph
+var callback = function (data) {
+	
+    // error1. normal grammer
+    // document.write(data)
+    
+    // error 2 : data format is string 
+    // var datatype = typeOf(data);
+    // document.write(datatype);
+ 
+    data = JSON.parse(data);
+    //alert(JSON.stringify(data1[0]));
+  
+    data.forEach(function(d) {
+        d.date = parseDate(d.date);
+        d.close = +d.close;
+    });
+ 
+    // 
+    x.domain(d3.extent(data, function(d) { return d.date; }));
+    y.domain([0, d3.max(data, function(d) { return d.close; })]);
+ 
+    // 
+    svg.append("path")
+        .attr("class", "line")
+        .attr("d", valueline(data));
+ 
+    // 
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+ 
+    //
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+ 
+};
+
+//  http://127.0.0.1/data callback.
+d3.json("{% url "data" %}",  callback);
+
+</script>
+
+</body>
+</html>
