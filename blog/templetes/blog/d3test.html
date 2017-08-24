@@ -1,84 +1,19 @@
-{% load staticfiles %}
+{% extends 'blog/base.html' %}
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>introduce</title>
-<style>
-
-#chart {
-  background: #fff;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin-left: 40px;
-}
-
-.title {
-    font-weight: bold;
-    font-size: 24px;
-    text-align: center;
-    margin-top: 6px;
-    margin-bottom: 6px;
-}
-text {
-  pointer-events: none;
-}
-
-.grandparent text {
-  font-weight: bold;
-}
-
-rect {
-  fill: none;
-  stroke: #fff;
-}
-
-rect.parent,
-.grandparent rect {
-  stroke-width: 2px;
-}
-
-rect.parent {
-    pointer-events: none;
-}
-
-.grandparent rect {
-  fill: orange;
-}
-
-.grandparent:hover rect {
-  fill: #ee9700;
-}
-
-.children rect.parent,
-.grandparent rect {
-  cursor: pointer;
-}
-
-.children rect.parent {
-  fill: #bbb;
-  fill-opacity: .5;
-}
-
-.children:hover rect.child {
-  fill: #bbb;
-}
-
-</style>
-
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-<link rel="stylesheet" href="{% static 'css/blog.css' %}">
-        
 </head>
 
 <body>
 
 {% block content %}
+<script type="text/javascript" src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
 <h1>Introduction</h1>
 <div id="chart"></div>
-
 
 <script>
 window.addEventListener('message', function(e) {
@@ -353,6 +288,7 @@ if (window.location.hash === "") {
     });
 }
 </script>
+
 {% endblock %}
 </body>
 </html>
