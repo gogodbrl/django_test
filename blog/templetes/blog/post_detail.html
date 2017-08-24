@@ -6,12 +6,15 @@
 <body>
 {% block content %}
  	<div class="post">
-        {% if post.published_date %}
+        {% if post.publish_date %}
             <div class="date">
-                {{ post.published_date }}
+                {{ post.publish_date }}
             </div>
         {% else %}
-    		<a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+        	<div class="date">
+                {{ post.created_date }}
+            </div>
+    		<!-- <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a> -->
         {% endif %}
         {% if user.is_authenticated %}
      		<a class="btn btn-default" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>

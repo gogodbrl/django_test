@@ -19,7 +19,6 @@
 window.addEventListener('message', function(e) {
     var opts = e.data.opts,
         data = e.data.data;
-
     return main(opts, data);
 });
 
@@ -175,9 +174,9 @@ function main(o, data) {
         .attr("class", "ctext")
         .text(function(d) { return d.key; })
         .call(text2);
-  
+ 	
     g.append("rect")
-        //.attr("class", "parent")
+       // .attr("class", "parent")
         .call(rect); 
 
  	var t = g.append("text")
@@ -191,21 +190,24 @@ function main(o, data) {
     t.call(text2);
 
      g.append("a")
-    	.attr("xlink:href", function(d){return d.inner_str;})
+    	.attr("xlink:href", function(d){return d.post_link;})
     	.append("rect");
     
     var test = g.append("text")
     	.attr("class", "ptext")
         .attr("dy", ".75em") 
         
+        
      test.append("tspan")
+     	.attr("font-size","34px")
+     	.attr("dy", "1.0em")
         .text(function(d) { return d.key; });
      
     test.append("tspan")
     	.attr("dy", "1.0em")
     	.text(function(d){return d.inner_str;});
     
-    test.call(text);
+    test.call(text); 
     
     g.selectAll("rect")
         .style("fill", function(d) { return color(d.key); });

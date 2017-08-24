@@ -1,79 +1,33 @@
 [
   {
-    "key": "mytest",
-    "region": "25",
+    "key": "<자기소개>",
+    "region": "[25세]",
     "value": 1,
-    "inner_str":"http://127.0.0.1:8000/"
+    "post_link":"http://127.0.0.1:8000/post/10/",
+    "inner_str":"so fast"
   },
   {
-    "key": "My Life",
-    "region": "25",
+    "key": "<Hello world>",
+    "region": "[25세]",
     "value": 1,
-    "inner_str":"http://www.naver.com"
+    "post_link":"http://127.0.0.1:8000/post/9/",
+    "inner_str":"만나서 반갑습니다"
   },
    {
-    "key": "mytest",
-    "region": "25",
+    "key": "[#3]",
+    "region": "[25세]",
+    "value": 1,
+    "post_link":"http://127.0.0.1:8000/post/8/",
+    "inner_str":"helo"
+  },
+   {
+    "key": "[#3]",
+    "region": "[24세]",
     "value": 1
   },
-  {
-    "key": "Algeria",
-    "region": "25",
-    "value": 1
-  },
-  {
-    "key": "American Samoa",
-    "region": "27",
-    "value": 1
-  },
-  {
-    "key": "Andorra",
-    "region": "26",
-    "value": 1
-  },
-  {
-    "key": "Angola",
-    "region": "25",
-    "value": 1
-  },
-  {
-    "key": "Anguilla",
-    "region": "25",
-    "value": 1
-  },
-  {
-    "key": "Antarctica",
-    "region": "22",
-    "value": 1
-  },
-  {
-    "key": "Antigua and Barbuda",
-    "region": "20",
-    "value": 1
-  },
-  {
-    "key": "Argentina",
-    "region": "25",
-    "value": 1
-  },
-  {
-    "key": "Armenia",
-    "region": "22",
-    "value": 1
-  },
-  {
-    "key": "Aruba",
-    "region": "23",
-    "value": 1
-  },
-  {
-    "key": "Australia",
-    "region": "24",
-    "value": 1
-  },
-  {
-    "key": "Austria",
-    "region": "24",
+     {
+    "key": "[#5]",
+    "region": "[23세]",
     "value": 1
   }
 ]
