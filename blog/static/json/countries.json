@@ -3,12 +3,13 @@
     "key": "mytest",
     "region": "25",
     "value": 1,
-    "inner_str":"127.0.0.1:8080/"
+    "inner_str":"http://127.0.0.1:8000/"
   },
   {
     "key": "My Life",
     "region": "25",
-    "value": 1
+    "value": 1,
+    "inner_str":"http://www.naver.com"
   },
    {
     "key": "Albania",
